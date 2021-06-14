@@ -9,6 +9,7 @@ import { Container, Content } from "./styles";
 
 import Upload from "./components/Upload";
 import FileList from "./components/FileList";
+import UploadMenssage from './components/UploadMenssage'
 
 class App extends Component {
   state = {
@@ -105,8 +106,15 @@ class App extends Component {
     const { uploadedFiles } = this.state;
 
     return (
+      
+        
+      
       <Container>
         <Content>
+          <UploadMenssage/>
+        </Content>
+        <Content>
+          
           <Upload onUpload={this.handleUpload} />
           {!!uploadedFiles.length && (
             <FileList files={uploadedFiles} onDelete={this.handleDelete} />
@@ -114,6 +122,7 @@ class App extends Component {
         </Content>
         <GlobalStyle />
       </Container>
+      
     );
   }
 }
