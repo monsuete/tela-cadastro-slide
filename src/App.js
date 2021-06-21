@@ -9,7 +9,7 @@ import { Container, Content } from "./styles";
 
 import Upload from "./components/Upload";
 import FileList from "./components/FileList";
-import UploadMenssage from './components/UploadMenssage'
+import UploadMenssage from './components/UploadMenssage/index'
 
 class App extends Component {
   state = {
