@@ -1,57 +1,126 @@
-// import { list } from 'postcss'
-import React, { useState, useEffect } from "react";
-import api from "../../services/api";
 
+// import React, { useState, useEffect } from "react";
+// import api from "../../services/api";
+
+// import "./styles.css";
+
+// export default function CadNotices() {
+//   const [notices, setNotices] = useState([]);
+
+//   useEffect(() => {
+//     api.get("notices").then((response) => {
+//       setNotices(response.data);
+//     });
+//   }, []);
+
+//   async function handleAddNotice() {
+ 
+//     await api.post("notices", {
+//       title: '',
+//       description: '',
+//     });
+//   }
+
+//   // async function remove(notices){
+//   //   await api.delete('notices', {
+//   //     title: `{notices.title}`,
+//   //     description: `{notices.description}`
+//   //   })
+//   // }
+
+
+   
+
+
+//   return ( 
+     
+//     <>
+//       <div className="grid-container">
+//         <div className="item1">Header</div>
+        
+//         <div className="item3">
+//           <div>
+//             {notices.map((notice) => (
+//               <div className="notice">
+//                 <h4>{notice.title}</h4> {notice.description}
+//               </div>
+//             ))}
+//           </div>
+          
+//         </div>
+//         <div className="item4">
+//           <div>
+//             <form action="/action_page.php">
+//               <label for="fname">Título</label>
+//               <input
+//                 type="text"
+//                 id="fname"
+//                 name="firstname"
+//                 placeholder="Título do aviso"
+//                 value={handleAddNotice.title}
+//               />
+
+//               <label for="lname">Desrcrição</label>
+//               <input
+//                 type="text"
+//                 id="lname"
+//                 name="lastname"
+//                 placeholder="Descrição do aviso"
+//                 value={handleAddNotice.description}
+//               />
+
+//               <button className="cad" type="button" onClick={handleAddNotice}>
+//                 Cadastrar
+//               </button>
+//             </form>
+//           </div>
+          
+//         </div>
+//       </div>
+
+    
+//     </>
+//   );
+// }
+
+import React, {useState}from 'react'
+
+import AddUserForm from './AddUserForm'
+import UserTable from './UserTable'
 import "./styles.css";
 
-export default function CadNotices() {
-  const [notices, setNotices] = useState([]);
+  const CadNotices = () => {
 
-  useEffect(() => {
-    api.get("notices").then((response) => {
-      setNotices(response.data);
-    });
-  }, []);
+  const usersData = [
+    { id: 1, name: 'Tania', username: 'floppydiskette' },
+    { id: 2, name: 'Craig', username: 'siliconeidolon' },
+    { id: 3, name: 'Ben', username: 'benisphere' },
+  ]
 
-  async function handleAddNotice() {
-    // notices.push(`Novo projeto ${Date.now()}`)
+  const initialFormState = { id: null, name: '', username: '' }
+  const [users, setUsers] = useState(usersData)
 
-    // setNotices([...notices, `Novo projeto ${Date.now()}`])
-    await api.post("notices", {
-      title: `Vuejs ${Date.now()}`,
-      description: "ldsfsaflksdajfdsklj",
-    });
+  const addUser = (user) => {
+    user.id = users.length + 1
+    setUsers([...users, user])
   }
 
+
   return (
-    <>
-      {notices.map((notice) => (
-        <div className="display">
-          <select
-            class="form-select"
-            multiple
-            aria-label="multiple select example"
-          >
-            <option selected>Open this select menu</option>
-            <option value="1">{notice.title}</option>
-          </select>
-          
+    <div className="container">
+      <h1>CRUD App with Hooks</h1>
+      <div className="flex-row">
+        <div className="flex-large">
+          <h2>Add user</h2>
+          <AddUserForm addUser={addUser} />
         </div>
-      ))}
-
-      <button type="button" onClick={handleAddNotice}>
-        Adiciontar Avisos
-      </button>
-
-      {/* <h1>Cadastre os avisos aqui</h1>
-      
-        <form action="">
-        <label for="fname">First name:</label><br/>
-        <input type="text" id="fname" name="fname" value="John"></input><br/>
-        <label for="lname">Last name:</label><br/>
-        <input type="text" id="lname" name="lname" value="Doe"></input><br/><br/>
-       <input type="submit" value="Submit"></input>
-        </form> */}
-    </>
-  );
+        <div className="flex-large">
+          <h2>View users</h2>
+          <UserTable users={users}/>
+        </div>
+      </div>
+    </div>
+  )
 }
+
+export default CadNotices
