@@ -5,15 +5,18 @@ import ListNotice from './list'
 
 export default function Notices() {
     const match = useRouteMatch()
-    return (<>
-        <div>Contexto de avisos</div>
-        <Switch>
-            <Route path={`${match.path}/novo`}>
-                <NewNotice />
-            </Route>
-            <Route path={`${match.path}`}>
-                <ListNotice />
-            </Route>
-        </Switch>
-     </>)
+    return (
+            <div class="container mx-auto px-4 sm:px-8">
+                <div class="py-8">
+                    <Switch>
+                        <Route path={`/avisos/novo`}>
+                            <NewNotice />
+                        </Route>
+                        <Route path={`${match.path}`}>
+                            <ListNotice />
+                        </Route>
+                </Switch>
+            </div>
+        </div>    
+    );
 }
